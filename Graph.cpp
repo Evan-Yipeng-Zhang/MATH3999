@@ -329,7 +329,8 @@ void Graph::prepareMWPMInput(const std::vector<int>& oddVertices, const std::str
 
     mwpmInputFile << oddVertices.size() << " " << filteredEdges.size() << "\n";
     for (const auto& edge : filteredEdges) {
-        mwpmInputFile << vertexMap[std::get<1>(edge)] << " " << vertexMap[std::get<2>(edge)] << " " << std::get<0>(edge) << "\n";
+        int weight = std::get<0>(edge);
+        mwpmInputFile << vertexMap[std::get<1>(edge)] << " " << vertexMap[std::get<2>(edge)] << " " << weight << "\n";
     }
 }
 
@@ -345,7 +346,7 @@ Graph create_graph(const std::string& inputFile) {
     std::ifstream inFile(inputFile);
     std::string line;
     if (!inFile) {
-        std::cerr << "Cannot open graph file." << std::endl;
+        std::cerr << "Cannot open graph file" << inputFile << std::endl;
         exit(101);
     }
 
